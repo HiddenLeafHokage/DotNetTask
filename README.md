@@ -104,5 +104,3 @@ Backend: .NET 8, ASP.NET Core, EF Core (SQL Server), Onion Slice
 Frontend: React, Vite, Tailwind CSS, react-icons
 
 
-License
-MIT (for demo purposes)
