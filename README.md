@@ -1,29 +1,24 @@
-# Dot NET E-commerce Demo (Onion Slice Architecture)
-
+Dot NET E-commerce Demo (Onion Slice Architecture)
 A modern e-commerce demo app built with:
 
-- **Backend:** .NET 8 (C#), Onion Slice architecture, EF Core In-Memory DB
-- **Frontend:** React (Vite), TypeScript, Tailwind CSS, react-icons
+Backend: .NET 8 (C#), Onion Slice architecture, EF Core with SQL Server Express
+Frontend: React (Vite), TypeScript, Tailwind CSS, react-icons
 
-## Features
+Features
 
-- Product catalog (6 Apple products, real images)
-- Shopping cart (add, update, remove)
-- User authentication (demo credentials)
-- Modern, responsive UI
+Product catalog (8 Apple products, real images)
+Shopping cart (add, update, remove)
+User authentication (demo credentials)
+Modern, responsive UI
 
----
 
-## Demo Credentials
+Demo Credentials
 
-- **Email:** `chukwukasolomon28@gmail.com`
-- **Password:** `DotNetTask`
+Email: chukwukasolomon28@gmail.com
+Password: DotNetTask
 
----
 
-## Project Structure
-
-```
+Project Structure
 Ecommerce/
 ├── backend/                # .NET 8 API (C#)
 │   ├── ECommerce.API/      # Main API project
@@ -32,76 +27,82 @@ Ecommerce/
 │   └── ECommerce.Application/    # Application logic
 ├── frontend/               # React + Vite + Tailwind frontend
 └── README.md               # This file
-```
-
----
-
-## Getting Started
 
 
+Getting Started
+Prerequisites
 
-### 1. Start the Backend API
+.NET 8.0 SDK
+Node.js and npm for frontend
+SQL Server Express installed and running as .\SQLEXPRESS
 
+1. Start the Backend API
 Open a terminal in the project root and run:
-
-```bash
 cd backend/ECommerce.API
-
 dotnet restore
-
 dotnet run
-```
 
-- The API uses an **in-memory database** (no setup needed).
-- Swagger UI available at: [http://localhost:5133/swagger](http://localhost:5133/swagger)
 
----
+The API now uses SQL Server Express with Windows Authentication.
+Database: ECommerceDb (automatically created via migrations).
+Swagger UI available at: http://localhost:5234/swagger
+Ensure SQL Server Express is running and accessible as .\SQLEXPRESS.
 
-### 2. Start the Frontend
-
+2. Start the Frontend
 Open a new terminal in the project root and run:
-
-```bash
 cd frontend
 npm install
 npm run dev
-```
 
-- The frontend expects the backend at `http://localhost:5133/api` (see `frontend/src/services/api.ts`).
-- If you change backend port, update the API URL in the frontend.
 
----
 
-## Usage
 
-1. Go to [http://localhost:5234](http://localhost:5173)
-2. Log in with the demo credentials above
-3. Browse products, add to cart, and checkout
 
----
+Usage
 
-## Troubleshooting
+Go to http://localhost:5173
+Log in with the demo credentials above
+Browse products, add to cart, and checkout
 
-- **Port in use:**
-  - Backend: Make sure nothing else is running on port 5234
-  - Frontend: Make sure nothing else is running on port 5173
-- **Permission errors (backend):**
-  - The API uses in-memory DB, so no file/database permissions are needed.
-- **Frontend can't connect to backend:**
-  - Ensure both servers are running
-  - Check CORS errors (should be allowed by default)
-- **Images not loading:**
-  - Product images use external URLs; check your internet connection
 
----
+Migration and Seeding
 
-## Tech Stack
+Migration to SQL Server Express: The project was migrated from an in-memory database to SQL Server Express. The connection string is configured in backend/ECommerce.API/appsettings.json using Windows Authentication.
+Seeding: Applied migration 20250727191357_SeedInitialProducts to seed 8 Apple products into the Products table. Verify data in SSMS with SELECT * FROM Products.
+API Endpoint: Products are accessible at /api/products.
 
-- **Backend:** .NET 8, ASP.NET Core, EF Core (InMemory), Onion Slice
-- **Frontend:** React, Vite, Tailwind CSS, react-icons
+Troubleshooting
 
----
+Port in use:
+Backend: Ensure nothing else is running on port 5234.
+Frontend: Ensure nothing else is running on port 5173 (adjust if needed).
 
-## License
 
+SQL Server Connection Issues:
+Verify SQL Server Express is running and .\SQLEXPRESS is accessible.
+Check appsettings.json for the correct connection string.
+
+
+Frontend can't connect to backend:
+Ensure both servers are running.
+Check CORS errors (allowed by default).
+
+
+Images not loading:
+Product images use external URLs; ensure an internet connection.
+
+
+Migration Issues:
+Run dotnet ef database update --startup-project ../ECommerce.API from ECommerce.Infrastructure to reapply migrations.
+
+
+
+
+Tech Stack
+
+Backend: .NET 8, ASP.NET Core, EF Core (SQL Server), Onion Slice
+Frontend: React, Vite, Tailwind CSS, react-icons
+
+
+License
 MIT (for demo purposes)
